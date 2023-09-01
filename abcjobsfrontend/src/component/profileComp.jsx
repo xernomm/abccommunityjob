@@ -159,9 +159,9 @@ const handleDeleteThread = (threadId) => {
     return(
         <div className="body">
             <div className="col-12 d-flex">
-                <div className="col-8">
-                    <div className="d-flex justify-content-center mb-4">
-                        <div className="col-11 profileBox bg-light">
+                <div className="col-8 px-3">
+                    <div className="d-flex justify-content-center mb-3">
+                        <div className="col-12 profileBox bg-light">
                             <div className="col-12 topImg">
                             </div>
                             <div className="col-12 profilePadding">
@@ -219,12 +219,11 @@ const handleDeleteThread = (threadId) => {
                     </div>
 
 
-                    <br />
                     {bio && (
                     <div>
-                    <p className="display-6 mt-3 ms-4">About Me</p>
-                    <div className="d-flex justify-content-center mb-4">
-                        <div className="col-11 loginBox bg-light my-auto">
+                    <div className="d-flex justify-content-center mb-3 mt-1">
+                        <div className="col-12 loginBox bg-light my-auto">
+                      <p className="display-6 mb-4">About Me</p>
                          <p className="lead">
                          {bio}
                          </p>
@@ -239,9 +238,10 @@ const handleDeleteThread = (threadId) => {
 
 
   <div>
-  <p className="display-6 mt-3 ms-4">My Posts</p>
   <div className="d-flex justify-content-center">
-    <div className="col-11 threadBox bg-light overflowContent px-5">
+<div className="threadBox bg-light px-5">
+<p className="display-6 mb-4">My Posts</p>
+<div className="col-12 overflowContent ">
       {threads.map(thread => {
         if (thread.user.email === userEmail) {
           return (
@@ -308,6 +308,8 @@ const handleDeleteThread = (threadId) => {
         </div>
       )}
     </div>
+</div>
+
   </div>
 </div>
 
@@ -317,7 +319,7 @@ const handleDeleteThread = (threadId) => {
                 <div className="col-4">
                     <div className="d-flex justify-content-center">
                     <a className='linkprimary' href="/jobs">
-                    <div className="col-10 jobBox checkJobs">
+                    <div className="col-12 jobBox checkJobs">
                         <div className="boxBlur p-5">
                         <p className="display-5 text-white">
                             ABC JOBS
@@ -332,12 +334,12 @@ const handleDeleteThread = (threadId) => {
                     </div>
                     </a>
                     </div>
-                    <Button href='/dashboard' variant='' className='btnPrimary col-10 my-3'>My Dashboard <Icon.MenuButtonWideFill /></Button>
+                    <Button href='/dashboard' variant='' className='btnPrimary col-12 my-3 mx-auto'>My Dashboard <Icon.MenuButtonWideFill /></Button>
 
 
-<div className="p-5">
+<div className="mt-2 px-3">
 <p className="lead fw-bold teksprimary mb-4">People you might know</p>
-            <div className="overflowContent ">
+            <div className="overflowContent">
 
             <AllUsersComponent />
 
