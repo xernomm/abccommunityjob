@@ -1,0 +1,318 @@
+
+
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.active{
+  color: #165d97 !important;
+
+}
+
+.App-link {
+  color: #61dafb;
+}
+button:hover{
+  color: white !important;
+}
+
+ul{
+  list-style: none !important;
+}
+
+li a{
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s;
+}
+
+li a:hover {
+  text-decoration: none;
+  color: #165d97;
+  transition: color 0.3s;
+
+}
+
+.nav-link{
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-link:hover{
+  text-decoration: none;
+  color: rgb(34, 70, 147) !important;
+  transition: color 0.3s;
+}
+
+.body{
+  padding: 8%;
+}
+.teksprimary{
+  color: rgb(34, 70, 147) !important;
+}
+
+.btnPrimary{
+  color: rgb(34, 70, 147) !important;
+  border-color:  rgb(34, 70, 147) !important;
+}
+.btnPrimary:hover{
+  color: rgb(255, 255, 255) !important;
+  border-color:  rgb(34, 70, 147) !important;
+  background-color: rgb(34, 70, 147) !important;
+}
+.btnBiru{
+  border-color:  rgb(34, 70, 147) !important;
+  background-color: rgb(34, 70, 147) !important;
+  color: rgb(255, 255, 255) !important;
+}
+.btnBiru:hover {
+  border-color:  rgb(34, 70, 147) !important;
+  background-color: rgb(24, 51, 108) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.linkprimary{
+  color: rgb(34, 70, 147) !important;
+  transition: color 0.5s;
+  text-decoration: none;
+}
+
+.linkprimary:hover{
+  color: rgb(64, 115, 226) !important;
+  text-decoration: none;
+  transition: color 0.5s;
+}
+
+.overflowContent{
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.overflowContent2{
+  max-height: 900px;
+  overflow-y: auto;
+}
+
+.visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+
+.overflowContent2::-webkit-scrollbar {
+  width: 5px;
+}
+
+.overflowContent2::-webkit-scrollbar-track {
+  background-color: transparent;
+  /* Set the background color of the track to transparent */
+
+}
+.btnPls{
+  border-radius: 50% !important;
+  padding: 1% !important;
+}
+
+
+.plusBtn{
+  font-size:40px !important;
+}
+
+.overflowContent2::-webkit-scrollbar-thumb {
+  background-color: rgb(42, 86, 183) !important;;
+  transition: background-color 0.5s;
+
+  border-radius: 5px;
+}
+
+.overflowContent2::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(44, 77, 149) !important;;
+  transition: background-color 0.5s;
+
+}
+
+.overflowContent::-webkit-scrollbar {
+  width: 5px;
+}
+
+.overflowContent::-webkit-scrollbar-track {
+  background-color: transparent;
+  /* Set the background color of the track to transparent */
+
+}
+
+.overflowContent::-webkit-scrollbar-thumb {
+  background-color: rgb(42, 86, 183) !important;;
+  transition: background-color 0.5s;
+
+  border-radius: 5px;
+}
+
+.overflowContent::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(44, 77, 149) !important;;
+  transition: background-color 0.5s;
+
+}
+
+.loginBox{
+  padding: 5% ;
+  border: 0.8px solid rgba(0, 0, 0, 0.144);
+  border-radius: 20px;
+  background-color: #c0c3c844;
+  
+}
+
+.adminBox{
+  padding: 7% ;
+  height: 90%;
+  border: 0.8px solid rgba(0, 0, 0, 0.144);
+  transition: border 0.5s, transform 0.5s, padding 0.5s;
+  border-radius: 20px;
+}
+
+.adminBox:hover{
+  padding: 1% ;
+  border: 0.8px solid rgba(9, 53, 196, 0.743);
+  border-radius: 20px;
+  transform: translateY(-5%);
+  transition: border 0.5s, transform 0.5s, padding 0.5s;
+}
+
+.aboutImg{
+  border-radius: 25px 60px 25px !important;
+}
+
+.homeImg{
+  border-radius: 300px 100px 200px 355px;
+  transition: transform 0.5s;
+
+}
+
+.homeImg:hover{
+  border-radius: 300px 100px 200px 355px;
+  transform: translateY(-4%);
+  transition: transform 0.5s;
+}
+.mightKnow{
+  border-radius: 50%;
+  height: 50px;
+  border: 0.8px solid rgba(0, 0, 0, 0.144);
+  width: 50px !important;
+}
+
+.like{
+  font-size: 20px;
+
+}
+.profileDash{
+  border-radius: 50%;
+  height: 215px;
+  width:  215px !important;
+}
+
+.profileBox{
+  border: 0.8px solid rgba(0, 0, 0, 0.144);
+  border-radius: 20px;
+  height: 60% !important;
+}
+
+.absolute{
+  position: absolute;
+  left: 25% !important;
+  width: 5% !important;
+  height: 10% !important;
+  margin-bottom: 5% !important;
+
+}
+
+.profilePadding{
+  padding: 8% 8% 0% 8%;
+  transform: translateY(-20%);
+}
+
+.profilePaddingPublic{
+  padding: 8% 8% 0% 8%;
+  transform: translateY(-23%);
+}
+
+.topImg{
+  border-radius: 20px 20px 0 0;
+  background-image: url("./img/banner.jpg");
+  background-size: cover;
+  padding: 13%;
+}
+.icon{
+  font-size: 20px;
+  margin-bottom: 2%;
+}
+.threadBox{
+  border-radius: 20px;
+  border: 0.8px solid rgba(0, 0, 0, 0.144);
+  padding-top: 6%;
+
+}
+.threadBody,.headerThread{
+  /* padding-right :  2%;
+  padding-left: 6%; */
+
+}
+.checkJobs{
+  background-image: url("./img/work.jpg");
+  background-size: cover;
+}
+.jobBox{
+  border: 0.8px solid rgba(0, 0, 0, 0.144);
+  border-radius: 20px;
+  background-color: #c0c3c844;
+}
+.boxBlur{
+  backdrop-filter: blur(3px);
+  border-radius: 20px !important;
+  padding: 5%;
+}
+.jobDetail{
+  height: 600px;
+  width: 600px !important;
+
+}
+.modalJob{
+  width: 900px !important;
+}
+.thread{
+  padding: 6%;
+  border: 0.8px solid rgba(0, 0, 0, 0.144);
+  background-color: white;
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
