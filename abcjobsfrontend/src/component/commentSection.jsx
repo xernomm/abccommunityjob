@@ -249,7 +249,15 @@ const CommentSection = () => {
                 <div key={comment.commentId} className="comment">
                     <hr />
                   <div className="commentHeader d-flex p-2">
+
+                    {comment.user.profilePicture && (
                     <img src={`data:image/jpeg;base64,${comment.user.profilePicture}`} alt="" className="mightKnow col-2" />
+
+                    )}
+                     {!comment.user.profilePicture && (
+                    <img src={profil} alt="" className="mightKnow col-2" />
+
+                    )}
                     <p className=" fw-bold text-dark my-auto mx-3 col-7">{comment.user.userName}</p>
                   </div>
                   <div className="commentBody pt-1 px-4">
@@ -289,7 +297,17 @@ const CommentSection = () => {
                       <div key={reply.commentReplyId} className="reply">
                         <br />
                         <div className='d-flex'>
+                    {reply.user.profilePicture && (
+
                           <img src={`data:image/jpeg;base64,${reply.user.profilePicture}`} alt="" className="mightKnow col-2" />
+                          
+                    )}
+
+                    {reply.user.profilePicture && (
+
+                    <img src={profil} alt="" className="mightKnow col-2" />
+
+                    )}
                           <p className=" ms-2 my-auto">{reply.user.userName}</p>
                         </div>
                         {/* Display reply content */}

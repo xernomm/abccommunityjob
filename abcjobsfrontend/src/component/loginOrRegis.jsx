@@ -156,8 +156,10 @@ const LoginOrRegis = () => {
                         Create your profile and dive into our professional fields!
                     </p>
                 </div>
-                <div className="col-6 overflowContent px-4">
-                {!showReplacement ? (
+                {/*  */}
+                <div className="col-6 p-3 loginBox bg-light">
+                  <div className="overflowContent p-4">
+                  {!showReplacement ? (
                     <div className="regis col-12">
                       <h1 className="display-4">Register</h1>
                         <br />                    
@@ -226,7 +228,8 @@ const LoginOrRegis = () => {
                     </Form.Control.Feedback>
                   )}
                         </Form.Floating>
-
+                        <br />
+                        <hr />
                         <br />
                         <h1 className="display-6">Tell us about yourself</h1>
                         <br />
@@ -356,6 +359,8 @@ const LoginOrRegis = () => {
 
                     </div>
                 )}
+                  </div>
+
 
                 </div>
             </div>

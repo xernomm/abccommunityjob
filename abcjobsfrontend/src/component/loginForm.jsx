@@ -79,7 +79,7 @@ function LoginForm(){
         <div className="body">
             <div className="col-12 d-flex justify-content-center ">
                 <div className="col-5 my-auto px-5">
-                <h1 style={{fontSize:"80px"}} className="display-1 mb-4 fw-bold text-secondary">
+                <h1 style={{fontSize:"70px"}} className="display-1 mb-4 fw-bold text-secondary">
                         Login<span className="teksprimary"> to ABC JOBS.</span>
                     </h1>
                 </div>

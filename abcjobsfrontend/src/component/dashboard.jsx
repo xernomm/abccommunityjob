@@ -309,11 +309,14 @@ return(
         </div>
 
         <div className="col-7 px-5">
-        <h1 className="display-6 mb-4">
-                What's New <span>
-                <Button href='/postThread' variant='outline' className=' btnPrimary btnPls '><Icon.Plus className='plusBtn lead'/></Button>
+          <div className="loginBox mb-4">
+          <h1 className="display-6">
+                What's on your mind? <span>
+                <Button href='/postThread' style={{borderRadius:"50%"}} variant='outline' className=' btnPrimary btnPls ms-1 '><Icon.Plus className='plusBtn'/></Button>
                 </span>
             </h1>
+          </div>
+
             <div className="col-12 d-flex mb-4">
             <Form className='col-12 d-flex' onSubmit={handleSearchSubmit}>
           <Form.Floating className='col-10'>
@@ -451,14 +454,18 @@ return(
             {searchResults.users?.length > 0 && (
               <div>
                 <p className="lead mb-3">Users</p>
-                <div className="overflowContent">
+                <div className="overflowContent p-3">
                   <div>
                     {searchResults.users.map(user => (
                       user.roleId === 2 && user.email !== userEmail && (
-                        <div key={user.userId} className="aUser col-12">
-                          <hr />
-                          <div className='d-flex col-12 p-3'>
+                        <div key={user.userId} className="loginBox col-12 bg-white mb-3">
+                          <div className='d-flex col-12'>
+                            {!user.profilePicture && (
                             <img src={profil} alt="" className="col-6 mightKnow my-auto" />
+                            )}
+                            {user.profilePicture && (
+                            <img src={`data:image/jpeg;base64,${user.profilePicture}`} alt="" className="col-6 mightKnow my-auto" />
+                            )}
                             <div className="my-auto ms-4 col-6">
                               <p className="fw-bold mb-1 ">{user.userName}</p>
                               <div className="d-flex col-12">
@@ -607,7 +614,7 @@ return(
 
         <div className="mt-5">
                     <p className="lead fw-bold teksprimary mb-4">People you might know</p>
-                <div className="overflowContent">
+                <div className="overflowContent p-2">
                     <AllUsersComponent />
                 </div>
             </div>

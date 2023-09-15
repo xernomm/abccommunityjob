@@ -42,8 +42,7 @@ const AllUsersComponent = () => {
         <div>
                 {usersData.map(user => (
                     user.roleId === 2 && user.email !== userEmail && (
-                        <div  key={user.userId} className="aUser col-12">
-                        <hr />
+                        <div  key={user.userId} className="loginBox bg-white mb-3 col-12">
                         <div className=' d-flex col-12'>
                             {user.profilePicture && (
                             <img src={`data:image/jpeg;base64,${user.profilePicture}`} alt="" className="col-6 mightKnow my-auto" />

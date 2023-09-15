@@ -154,7 +154,12 @@ return (
       {threads.map(thread => (
         <div key={thread.threadId} className="thread mb-5">
           <div className="headerThread mb-3 d-flex">
+            {thread.user.profilePicture && (
+            <img src={`data:image/jpeg;base64,${thread.user.profilePicture}`} alt="" className="mightKnow col-2" />
+            )}
+            {!thread.user.profilePicture && (
             <img src={profil} alt="" className="mightKnow col-2" />
+            )}
             <p className="lead fw-bold text-dark my-auto mx-3 col-7">{thread.user.userName}</p>
             <small className=" text-muted text-center my-auto ">{formatDistanceToNow(new Date(thread.threadDate), { addSuffix: true })}</small>
 
