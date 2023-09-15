@@ -309,10 +309,10 @@ return(
         </div>
 
         <div className="col-7 px-5">
-          <div className="loginBox mb-4">
-          <h1 className="display-6">
+          <div className="loginBox bg-white mb-4 py-4">
+          <h1 style={{fontSize:"30px"}} className="display-6 my-auto">
                 What's on your mind? <span>
-                <Button href='/postThread' style={{borderRadius:"50%"}} variant='outline' className=' btnPrimary btnPls ms-1 '><Icon.Plus className='plusBtn'/></Button>
+                <Button href='/postThread' style={{borderRadius:"50%"}} variant='outline' className=' btnBiru btnPls '><Icon.Plus className='plusBtn'/></Button>
                 </span>
             </h1>
           </div>
@@ -337,6 +337,39 @@ return(
             <div>
    
             </div>
+            {searchResults.users?.length > 0 && (
+              <div>
+                <p className="lead mb-3">Users</p>
+                <div className="overflowContent p-3">
+                  <div>
+                    {searchResults.users.map(user => (
+                      user.roleId === 2 && user.email !== userEmail && (
+                        <div key={user.userId} className="loginBox col-12 bg-white mb-3">
+                          <div className='d-flex col-12'>
+                            {!user.profilePicture && (
+                            <img src={profil} alt="" className="col-6 mightKnow my-auto" />
+                            )}
+                            {user.profilePicture && (
+                            <img src={`data:image/jpeg;base64,${user.profilePicture}`} alt="" className="col-6 mightKnow my-auto" />
+                            )}
+                            <div className="my-auto ms-4 col-6">
+                              <p className="fw-bold mb-1 ">{user.userName}</p>
+                              <div className="d-flex col-12">
+                              <Button variant='outline' href={`/profile/${user.userId}`} className='btn-outline-secondary col-7 mx-3'><small>View profile <Icon.PersonFill className='lead' /></small></Button>
+                              <Button variant='outline' className='btnBiru col-7 mx-auto'><small>Follow <Icon.PersonFillAdd className='mb-1 lead' /></small></Button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    ))}
+                  </div>
+                </div>
+                <br />
+                <br />
+                <br />
+              </div>
+            )}
 
             {searchResults.threads?.length > 0 && (
               
@@ -451,39 +484,7 @@ return(
 
             )}
 
-            {searchResults.users?.length > 0 && (
-              <div>
-                <p className="lead mb-3">Users</p>
-                <div className="overflowContent p-3">
-                  <div>
-                    {searchResults.users.map(user => (
-                      user.roleId === 2 && user.email !== userEmail && (
-                        <div key={user.userId} className="loginBox col-12 bg-white mb-3">
-                          <div className='d-flex col-12'>
-                            {!user.profilePicture && (
-                            <img src={profil} alt="" className="col-6 mightKnow my-auto" />
-                            )}
-                            {user.profilePicture && (
-                            <img src={`data:image/jpeg;base64,${user.profilePicture}`} alt="" className="col-6 mightKnow my-auto" />
-                            )}
-                            <div className="my-auto ms-4 col-6">
-                              <p className="fw-bold mb-1 ">{user.userName}</p>
-                              <div className="d-flex col-12">
-                              <Button variant='outline' href={`/profile/${user.userId}`} className='btn-outline-secondary col-7 mx-3'><small>View profile <Icon.PersonFill className='lead' /></small></Button>
-                              <Button variant='outline' className='btnBiru col-7 mx-auto'><small>Follow <Icon.PersonFillAdd className='mb-1 lead' /></small></Button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )
-                    ))}
-                  </div>
-                </div>
-                <br />
-                <br />
-                <br />
-              </div>
-            )}
+
 
 
             {!searchQuery && (
