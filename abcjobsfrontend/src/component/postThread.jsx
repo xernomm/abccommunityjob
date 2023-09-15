@@ -11,6 +11,8 @@ const PostThread = () => {
   const [hashtags, setHashtags] = useState("");
   const [userEmail, setUserEmail] = useState(null);
   const [userName, setUserName] = useState(null);
+
+  
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 

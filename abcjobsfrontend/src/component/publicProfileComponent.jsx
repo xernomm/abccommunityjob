@@ -74,7 +74,14 @@ const PublicProfileComp = ({ selectedUser }) => {
           <div className="col-12 topImg">
           </div>
           <div className="col-12 profilePaddingPublic">
+            {selectedUser.profilePicture && (
+           <img src={`data:image/jpeg;base64,${selectedUser.profilePicture}`} alt="" className="col-8 profileDash" />
+
+            )}
+            {!selectedUser.profilePicture && (
            <img src={profil} alt="" className="col-8 profileDash" />
+
+            )}
 
             {userName && <p className="display-6 mt-3 ">{userName}</p>}
 
@@ -146,7 +153,7 @@ const PublicProfileComp = ({ selectedUser }) => {
           return (
             <div key={thread.threadId} className="thread bg-white mb-4">
             <div className="headerThread mb-3 d-flex">
-                <img src={profil} alt="" className="mightKnow col-2" />
+                <img src={`data:image/jpeg;base64,${thread.user.profilePicture}`} alt="" className="mightKnow col-2" />
                 <p className="lead fw-bold text-dark my-auto mx-3 col-7">{thread.user.userName}</p>
                 <small className=" text-muted text-center my-auto ">{formatDistanceToNow(new Date(thread.threadDate), { addSuffix: true })}</small>
 

@@ -23,6 +23,9 @@ public class User {
     private int roleId;
     private boolean isSuspended;
 
+    @Lob
+    private byte[] profilePicture;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
     private UserDetails userDetails;

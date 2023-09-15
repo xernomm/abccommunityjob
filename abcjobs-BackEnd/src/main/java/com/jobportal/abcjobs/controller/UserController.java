@@ -170,6 +170,14 @@ public class UserController {
             currentUser.setSuspended(true);
         }
 
+        try {
+            userService.saveWithProfile(currentUser, editProfileRequestBody.getProfilePicture());
+        } catch (IOException e){
+            responseData.setMessage("Error uploading thread with image.");
+            responseData.setStatus(false);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseData);
+        }
+
         userRepository.save(currentUser);
         responseData.setStatus(true);
         responseData.setMessage("User Successfully Updated");
@@ -547,6 +555,17 @@ public class UserController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/get-details-user/{email}")
+    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
+        Optional<User> idUser = userRepository.findByEmail(email);
+        if (idUser.isPresent()) {
+            return ResponseEntity.ok(idUser.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+
 
     @GetMapping("/job/{jobId}")
     public ResponseEntity<Jobs> getJobDetails(@PathVariable Long jobId) {

@@ -76,8 +76,8 @@ const JobList = () => {
       {jobs.map((job) => (
         job.full === false && (
           <div key={job.jobId}>
-          <hr />
-          <div  className="job d-flex col-12 px-5">
+          
+          <div  className="loginBox bg-white job d-flex col-12 px-5">
           <div className="col-4 d-flex justify-content-center">
               <img src={jobImg} alt="" className="col-12" />
           </div>

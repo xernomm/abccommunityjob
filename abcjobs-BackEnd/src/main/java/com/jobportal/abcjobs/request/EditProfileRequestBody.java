@@ -17,4 +17,5 @@ public class EditProfileRequestBody {
     private String education;
     private String experience;
     private String bio;
+    private MultipartFile profilePicture;
 }

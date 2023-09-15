@@ -28,10 +28,7 @@ const [showModal, setShowModal] = useState(false);
   const parsedUser = JSON.parse(user);
   const token = parsedUser.token;
 
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  };
-
+  const [userInfo, setUserInfo] = useState(null); 
   const[userEmail, setUserEmail] = useState(null)
   const[userName, setUserName] = useState(null)
   const[bio, setUserBio] = useState(null)
@@ -46,6 +43,48 @@ const [showModal, setShowModal] = useState(false);
   const [commentCounts, setCommentCounts] = useState({});
   const [threads, setThreads] = useState([]);
   const [usersData, setUsersData] = useState([]);
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  
+  useEffect(() => {
+    axios.get(`http://localhost:8080/user/get-details-user/${parsedUser.email}`, { headers })
+      .then((response) => {
+        console.log(response.data);
+  
+        setUserInfo(response.data);
+  
+        if (response.data.userDetails) {
+          setUserEmail(response.data.email);
+          setUserAddress(response.data.userDetails.address || '');
+          setUserAge(response.data.userDetails.age || '');
+          setUserPhoneNumber(response.data.userDetails.phoneNumber || '');
+          setUserEduation(response.data.userDetails.education || '');
+          setUserUniversity(response.data.userDetails.university || '');
+          setUserBio(response.data.userDetails.bio || '');
+          setUserExperience(response.data.userDetails.experience || '');
+          setRoleId(response.data.roleId);
+          setUserName(response.data.userName);
+          
+          // Check if any of the user details fields are null or empty
+          setShowAlert(
+            !response.data.userDetails.age ||
+            !response.data.userDetails.university ||
+            !response.data.userDetails.education ||
+            !response.data.userDetails.address ||
+            !response.data.userDetails.phoneNumber ||
+            !response.data.userDetails.experience
+          );
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+  
+
+
   
 
 
@@ -93,18 +132,7 @@ const [showModal, setShowModal] = useState(false);
     const user = sessionStorage.getItem('loginFormData');
     if (user) {
         const parsedUser = JSON.parse(user);
-        setUserEmail(parsedUser.email);
-        setUserAddress(parsedUser.userDetails.address);
-        setUserAge(parsedUser.userDetails.age);
-        setUserPhoneNumber(parsedUser.userDetails.phoneNumber);
-        setUserEduation(parsedUser.userDetails.education);
-        setUserUniversity(parsedUser.userDetails.university);
-        setUserBio(parsedUser.userDetails.bio);
-        setUserExperience(parsedUser.userDetails.experience);
-        setRoleId(parsedUser.roleId)
-        setUserName(parsedUser.name);
-
-        setShowAlert( !parsedUser.userDetails.age || !parsedUser.userDetails.university || !parsedUser.userDetails.education || !parsedUser.userDetails.address || !parsedUser.userDetails.phoneNumber || !parsedUser.userDetails.experience);
+        
     }
 }, []);
 
@@ -159,162 +187,170 @@ const handleDeleteThread = (threadId) => {
     return(
         <div className="body">
             <div className="col-12 d-flex">
-                <div className="col-8 px-3">
-                    <div className="d-flex justify-content-center mb-3">
-                        <div className="col-12 profileBox bg-light">
-                            <div className="col-12 topImg">
-                            </div>
-                            <div className="col-12 profilePadding">
-                            {/* {`data:image/jpeg;base64,${parsedUser.userDetails.profilePicture}`} */}
-                                    <img src={profil} alt="" className="col-8 my-auto profileDash" />
-                                    {/* userName */}
+              {userInfo && (
+               <div className="col-8 px-3">
+               <div className="d-flex justify-content-center mb-3">
+                   <div className="col-12 profileBox bg-light">
+                       <div className="col-12 topImg">
+                       </div>
+                       <div className="col-12 profilePadding">
+                       {/* {`data:image/jpeg;base64,${parsedUser.userDetails.profilePicture}`} */}
+                       {userInfo.profilePicture && (
+                               <img src={`data:image/jpeg;base64,${userInfo.profilePicture}`} alt="" className="col-8 my-auto profileDash" />
 
-                                    {userName &&(
-                                <p className="display-6 mt-3 ">{userName}</p> 
-                                    )}
+                       )}
+                       {!userInfo.profilePicture && (
+                               <img src={profil} alt="" className="col-8 my-auto profileDash" />
 
-                                {/* bio */}
-                                {experience &&(
-                                <p className="lead">{experience}</p>
-                                )}
-                                <div className="my-auto">
-                                <hr />
-                                {age&& userName &&(
-                                <p className="lead mt-3"><Icon.Person/> {userName}, <span className="fw-bold teksprimary">{age} years old</span>.</p>
-                                )}
-                                {!age&&(
-                                    <p className="lead mt-3"> </p>
-                                )}
-                                {university &&(
-                                <p className="lead mt-5"><Icon.Award/> Educated in <span className="fw-bold teksprimary">{university}</span>,</p>
-                                )}
-                                {education&&(
-                                <p className="lead mt-1 mb-5"><Icon.Book/> Taking <span className="fw-bold teksprimary">{education} </span>Course.</p>
-                                )}
-                                {address &&(
-                                <p className="lead mt-3 mb-5"><Icon.House/> {address}</p>
-                                )}
-                                <p className="lead mt-5 fw-bold teksprimary">Contacts</p>
-                                <hr />
-                                {/* email */}
-                                <p className="lead mt-3 teksprimary"><Icon.EnvelopeAt/> {userEmail}</p>
-                                {phoneNumber &&(
-                                <p className="lead mt-3 teksprimary"><Icon.Telephone/> {phoneNumber}</p>
-                                )}
+                       )}
+                               {/* userName */}
 
+                               {userName &&(
+                           <p className="display-6 mt-3 ">{userName}</p> 
+                               )}
 
-                                
-                                </div>
-                                {(!age || !university || !education || !address || !phoneNumber || !experience || age || university || education || address || phoneNumber || experience) && (
-                                    <div>
-                                        <Button variant="" onClick={handleShowModal} className="col-3 btnBiru mt-4">Edit Profile</Button>
-                                        <EditProfileModal show={showModal} onHide={handleCloseModal} />
-                                    </div>
-                                )}
+                           {/* bio */}
+                           {experience &&(
+                           <p className="lead">{experience}</p>
+                           )}
+                           <div className="my-auto">
+                           <hr />
+                           {age&& userName &&(
+                           <p className="lead mt-3"><Icon.Person/> {userName}, <span className="fw-bold teksprimary">{age} years old</span>.</p>
+                           )}
+                           {!age&&(
+                               <p className="lead mt-3"> </p>
+                           )}
+                           {university &&(
+                           <p className="lead mt-5"><Icon.Award/> Educated in <span className="fw-bold teksprimary">{university}</span>,</p>
+                           )}
+                           {education&&(
+                           <p className="lead mt-1 mb-5"><Icon.Book/> Taking <span className="fw-bold teksprimary">{education} </span>Course.</p>
+                           )}
+                           {address &&(
+                           <p className="lead mt-3 mb-5"><Icon.House/> {address}</p>
+                           )}
+                           <p className="lead mt-5 fw-bold teksprimary">Contacts</p>
+                           <hr />
+                           {/* email */}
+                           <p className="lead mt-3 teksprimary"><Icon.EnvelopeAt/> {userEmail}</p>
+                           {phoneNumber &&(
+                           <p className="lead mt-3 teksprimary"><Icon.Telephone/> {phoneNumber}</p>
+                           )}
 
 
-                            </div>
-                            
-                        </div>
-                    </div>
+                           
+                           </div>
+                           {(!age || !university || !education || !address || !phoneNumber || !experience || age || university || education || address || phoneNumber || experience) && (
+                               <div>
+                                   <Button variant="" onClick={handleShowModal} className="col-3 btnBiru mt-4">Edit Profile</Button>
+                                   <EditProfileModal show={showModal} onHide={handleCloseModal} />
+                               </div>
+                           )}
 
 
-                    {bio && (
-                    <div>
-                    <div className="d-flex justify-content-center mb-3 mt-1">
-                        <div className="col-12 loginBox bg-light my-auto">
-                      <p className="display-6 mb-4">About Me</p>
-                         <p className="lead">
-                         {bio}
-                         </p>
-                        </div>
-                    </div>
-                    </div>
-                    )}
+                       </div>
+                       
+                   </div>
+               </div>
+
+
+               {bio && (
+               <div>
+               <div className="d-flex justify-content-center mb-3 mt-1">
+                   <div className="col-12 loginBox bg-light my-auto">
+                 <p className="display-6 mb-4">About Me</p>
+                    <p className="lead">
+                    {bio}
+                    </p>
+                   </div>
+               </div>
+               </div>
+               )}
 
 
 
 
 
 
-  <div>
-  <div className="d-flex justify-content-center">
-<div className="threadBox bg-light px-5">
-<p className="display-6 mb-4">My Posts</p>
-<div className="col-12 overflowContent ">
-      {threads.map(thread => {
-        if (thread.user.email === userEmail) {
-          return (
-            <div key={thread.threadId} className="thread bg-white mb-4">
-            <div className="headerThread mb-3 d-flex">
-                <img src={profil} alt="" className="mightKnow col-2" />
-                <p className="lead fw-bold text-dark my-auto mx-3 col-7">{thread.user.userName}</p>
-                <small className=" text-muted text-center my-auto ">{formatDistanceToNow(new Date(thread.threadDate), { addSuffix: true })}</small>
+            <div className="d-flex justify-content-center col-12">
+            <div className="threadBox bg-light px-5 col-12">
+            <p className="display-6 mb-4">My Posts</p>
+            <div className="col-12 overflowContent ">
+            {threads.map(thread => {
+              if (thread.user.email === userEmail) {
+                return (
+                  <div key={thread.threadId} className="thread bg-white mb-4">
+                  <div className="headerThread mb-3 d-flex">
+                      <img src={profil} alt="" className="mightKnow col-2" />
+                      <p className="lead fw-bold text-dark my-auto mx-3 col-7">{thread.user.userName}</p>
+                      <small className=" text-muted text-center my-auto ">{formatDistanceToNow(new Date(thread.threadDate), { addSuffix: true })}</small>
 
-            </div>
+                  </div>
 
-            
-            <br />
-            <div className="headerThread d-flex">
+                  
+                  <br />
+                  <div className="headerThread d-flex">
 
-                <h1 className="lead fw-bold mb-3 col-10">
-                {thread.threadHeader}
-                </h1>
+                      <h1 className="lead fw-bold mb-3 col-10">
+                      {thread.threadHeader}
+                      </h1>
 
-                {thread.user.email === userEmail && (
-                <div className="d-flex col-2">
-                <Link to={`/editThread/${thread.threadId}`} className="linkprimary col-6">
-                <Icon.PencilFill className="lead text-center" />
-                </Link>
+                      {thread.user.email === userEmail && (
+                      <div className="d-flex col-2">
+                      <Link to={`/editThread/${thread.threadId}`} className="linkprimary col-6">
+                      <Icon.PencilFill className="lead text-center" />
+                      </Link>
 
-                <Link onClick={() => handleDeleteThread(thread.threadId)} className="text-danger col-6">
-                <Icon.TrashFill className="lead text-center" />
-                </Link>
-                </div>
-                )}
+                      <Link onClick={() => handleDeleteThread(thread.threadId)} className="text-danger col-6">
+                      <Icon.TrashFill className="lead text-center" />
+                      </Link>
+                      </div>
+                      )}
 
-                </div>
-            <div className="threadBody">
-                <p className="lead">
-                {thread.threadBody}
-                </p>
+                      </div>
+                  <div className="threadBody">
+                      <p className="lead">
+                      {thread.threadBody}
+                      </p>
 
 
-                {/* Display the image */}
-            {thread.threadImage && (
-            <div className="threadImage d-flex justify-content-center">
-                <img className='col-12 rounded-4' src={`data:image/jpeg;base64,${thread.threadImage}`} alt="Thread" />
-            </div>
+                      {/* Display the image */}
+                  {thread.threadImage && (
+                  <div className="threadImage d-flex justify-content-center">
+                      <img className='col-12 rounded-4' src={`data:image/jpeg;base64,${thread.threadImage}`} alt="Thread" />
+                  </div>
+                  )}
+                  </div>
+                  <div className='d-flex justify-content-end mt-4'>
+
+                      <Link className='linkprimary ' to={`/comment/${thread.threadId}`}>
+                      <Icon.ChatDots
+                          className="teksprimary mb-1"
+                      /><span className="teksprimary ms-2 me-2 mt-1">{commentCounts[thread.threadId] || 0} comments</span>
+                      </Link>
+                      
+                  </div>
+                  </div>
+                );
+              }
+              return null;
+            })}
+            {threads.filter(thread => thread.user.email === userEmail).length === 0 && (
+              <div style={{padding:"20%"}} className="col-12 overflowContent text-center">
+                <p className="lead"><span className="teksprimary fw-bold">{userName}</span> haven't posted anything. </p>
+                <Button variant='' href='/postThread' className='btnPrimary col-6'>Add Post <Icon.PlusLg className='mb-1' /></Button>
+              </div>
             )}
             </div>
-            <div className='d-flex justify-content-end mt-4'>
-
-                <Link className='linkprimary ' to={`/comment/${thread.threadId}`}>
-                <Icon.ChatDots
-                    className="teksprimary mb-1"
-                /><span className="teksprimary ms-2 me-2 mt-1">{commentCounts[thread.threadId] || 0} comments</span>
-                </Link>
-                
             </div>
+
             </div>
-          );
-        }
-        return null;
-      })}
-      {threads.filter(thread => thread.user.email === userEmail).length === 0 && (
-        <div style={{padding:"20%"}} className="text-center">
-          <p className="lead"><span className="teksprimary fw-bold">{userName}</span> haven't posted anything. </p>
-          <Button variant='' href='/postThread' className='btnPrimary col-6'>Add Post <Icon.PlusLg className='mb-1' /></Button>
-        </div>
-      )}
-    </div>
-</div>
-
-  </div>
-</div>
 
 
-                </div>
+           </div>
+              )}
+ 
                 
                 <div className="col-4">
                     <div className="d-flex justify-content-center">

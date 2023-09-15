@@ -42,6 +42,13 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User saveWithProfile(User user, MultipartFile imageFile)throws IOException{
+        if( imageFile!=null && !imageFile.isEmpty()){
+            user.setProfilePicture(imageFile.getBytes());
+        }
+        return userRepository.save(user);
+    }
+
     public User updateUser(User user) {
 
             String encodedPassword = passwordEncoder.encode(user.getPassword());
@@ -61,13 +68,11 @@ public class UserService {
     }
 
 
-    // Fungsi untuk menemukan user berdasarkan ID
     public User findUserById(Long userId) {
         Optional<User> userOptional = userRepository.findById(userId);
         return userOptional.orElse(null);
     }
 
-    // Fungsi untuk menghapus user
     public void deleteUserById(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException(String.valueOf(userId) + "not found"));

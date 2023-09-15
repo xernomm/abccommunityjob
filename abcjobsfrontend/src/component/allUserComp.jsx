@@ -45,7 +45,12 @@ const AllUsersComponent = () => {
                         <div  key={user.userId} className="aUser col-12">
                         <hr />
                         <div className=' d-flex col-12'>
+                            {user.profilePicture && (
+                            <img src={`data:image/jpeg;base64,${user.profilePicture}`} alt="" className="col-6 mightKnow my-auto" />
+                            )}
+                            {!user.profilePicture && (
                             <img src={profil} alt="" className="col-6 mightKnow my-auto" />
+                            )}
                             <div className="my-auto ms-4 col-6">
                              <p className="fw-bold mb-1">{user.userName}</p>
                              <Button variant='outline' href={`/profile/${user.userId}`} className='btnPrimary col-10'><small>View profile</small></Button>

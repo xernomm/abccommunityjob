@@ -184,6 +184,7 @@ li a:hover {
   border: 0.8px solid rgba(0, 0, 0, 0.144);
   border-radius: 20px;
   background-color: #c0c3c844;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
   
 }
 
@@ -193,6 +194,8 @@ li a:hover {
   border: 0.8px solid rgba(0, 0, 0, 0.144);
   transition: border 0.5s, transform 0.5s, padding 0.5s;
   border-radius: 20px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+
 }
 
 .adminBox:hover{
@@ -201,6 +204,8 @@ li a:hover {
   border-radius: 20px;
   transform: translateY(-5%);
   transition: border 0.5s, transform 0.5s, padding 0.5s;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+
 }
 
 .aboutImg{
@@ -237,6 +242,7 @@ li a:hover {
 
 .profileBox{
   border: 0.8px solid rgba(0, 0, 0, 0.144);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
   height: 60% !important;
 }
@@ -274,7 +280,7 @@ li a:hover {
   border-radius: 20px;
   border: 0.8px solid rgba(0, 0, 0, 0.144);
   padding-top: 6%;
-
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 }
 .threadBody,.headerThread{
   /* padding-right :  2%;
@@ -289,11 +295,15 @@ li a:hover {
   border: 0.8px solid rgba(0, 0, 0, 0.144);
   border-radius: 20px;
   background-color: #c0c3c844;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+
 }
 .boxBlur{
   backdrop-filter: blur(3px);
   border-radius: 20px !important;
   padding: 5%;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+
 }
 .jobDetail{
   height: 600px;
@@ -307,6 +317,8 @@ li a:hover {
   padding: 6%;
   border: 0.8px solid rgba(0, 0, 0, 0.144);
   background-color: white;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+
 }
 @keyframes App-logo-spin {
   from {

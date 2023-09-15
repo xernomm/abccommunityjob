@@ -178,16 +178,16 @@ const CommentSection = () => {
   return (
     <div className="body">
       <div className="d-flex justify-content-center">
-        <div className="col-7 px-2 container lines">
+        <div className="col-7 loginBox p-5 bg-light">
             <p className="lead">Uploaded by</p>
           <div className="col-12 d-flex">
-            <img src={profil} alt="" className="mightKnow col-2" />
+            <img src={`data:image/jpeg;base64,${selectedThread.thread.user.profilePicture}`} alt="" className="mightKnow col-2" />
             <p className="lead fw-bold text-dark my-auto mx-3 col-7">{selectedThread.thread.user.userName}</p>
             <small className="text-muted my-auto text-center lead col-4">{formatDistanceToNow(new Date(selectedThread.thread.threadDate), { addSuffix: true })}</small>
             {/*  */}
           </div>
          <hr />
-  <div className="col-10 mx-auto">
+  <div className="col-12 mx-auto">
   <div className='mx-auto'>
   <div className="mt-5">
             <h1 className="display-6 fw-bold mb-4">
@@ -218,7 +218,7 @@ const CommentSection = () => {
 
 
         </div>
-        <div className="col-5 ms-4 px-2 pt-5">
+        <div className="col-5 ms-4 px-5 pt-5 loginBox bg-light">
         <div className="comments ">
             <p className="display-6">Comments</p>
             <br />
@@ -249,7 +249,7 @@ const CommentSection = () => {
                 <div key={comment.commentId} className="comment">
                     <hr />
                   <div className="commentHeader d-flex p-2">
-                    <img src={profil} alt="" className="mightKnow col-2" />
+                    <img src={`data:image/jpeg;base64,${comment.user.profilePicture}`} alt="" className="mightKnow col-2" />
                     <p className=" fw-bold text-dark my-auto mx-3 col-7">{comment.user.userName}</p>
                   </div>
                   <div className="commentBody pt-1 px-4">
@@ -289,7 +289,7 @@ const CommentSection = () => {
                       <div key={reply.commentReplyId} className="reply">
                         <br />
                         <div className='d-flex'>
-                          <img src={profil} alt="" className="mightKnow col-2" />
+                          <img src={`data:image/jpeg;base64,${reply.user.profilePicture}`} alt="" className="mightKnow col-2" />
                           <p className=" ms-2 my-auto">{reply.user.userName}</p>
                         </div>
                         {/* Display reply content */}

@@ -21,6 +21,8 @@ public class UserDetails {
     private String university;
     private String education;
     private String experience;
+
+    @Column(length = 10000)
     private String bio;
 
 

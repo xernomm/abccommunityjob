@@ -27,9 +27,9 @@ const DashboardComp = () => {
 
 
     
-    const [userEmail, setUserEmail] = useState(null);
-    const [userName, setUserName] = useState(null);
-    const [roleId, setRoleId] = useState(null);
+    // const [userEmail, setUserEmail] = useState(null);
+    // const [userName, setUserName] = useState(null);
+    // const [roleId, setRoleId] = useState(null);
     const [usersData, setUsersData] = useState([]);
 
     useEffect(() => {
@@ -44,15 +44,46 @@ const DashboardComp = () => {
   }, []);
 
 
-    useEffect(() => {
-      const user = sessionStorage.getItem('loginFormData');
-      if (user) {
-        const parsedUser = JSON.parse(user);
-        setUserEmail(parsedUser.email);
-        setUserName(parsedUser.name)
-        setRoleId(parsedUser.roleId)
-      }
-    }, []);
+  const [userInfo, setUserInfo] = useState(null); 
+  const[userEmail, setUserEmail] = useState(null)
+  const[userName, setUserName] = useState(null)
+  const[bio, setUserBio] = useState(null)
+  const[university, setUserUniversity] = useState(null)
+  const[education, setUserEduation] = useState(null)
+  const[phoneNumber, setUserPhoneNumber] = useState(null)
+  const[address, setUserAddress] = useState(null)
+  const[age, setUserAge] = useState(null)
+  const[experience, setUserExperience] = useState(null)
+  const[showAlert, setShowAlert] = useState(false)
+  const[roleId, setRoleId] = useState(null);
+
+
+
+  
+  useEffect(() => {
+    axios.get(`http://localhost:8080/user/get-details-user/${parsedUser.email}`, { headers })
+      .then((response) => {
+        console.log(response.data)
+        setUserInfo(response.data);
+        
+          setUserEmail(response.data.email);
+          setUserAddress(response.data.userDetails.address);
+          setUserAge(response.data.userDetails.age);
+          setUserPhoneNumber(response.data.userDetails.phoneNumber);
+          setUserEduation(response.data.userDetails.education);
+          setUserUniversity(response.data.userDetails.university);
+          setUserBio(response.data.userDetails.bio);
+          setUserExperience(response.data.userDetails.experience);
+          setRoleId(response.data.roleId)
+          setUserName(response.data.userName);
+  
+          setShowAlert( !response.data.userDetails.age || !response.data.userDetails.university || !response.data.userDetails.education || !response.data.userDetails.address || !response.data.userDetails.phoneNumber || !response.data.userDetails.experience);
+       
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
     const [counts, setCounts] = useState({
         users: 0,
@@ -246,12 +277,22 @@ return(
             <NotFoundComp />
         )}
 
-{roleId === 2 && (
+{roleId === 2 && userInfo &&(
 <div className="user body col-12 d-flex justify-content-center bg-light">
 <div className="col-3 me-3  ">
             <div className=" my-auto threadBox p-5 bg-white">
                 <div className="d-flex justify-content-center">
+
+                {userInfo.profilePicture && (
+                <img src={`data:image/jpeg;base64,${userInfo.profilePicture}`} alt="" className="mb-4 col-10 mx-auto profileDash" />
+
+                )}
+                
+                {!userInfo.profilePicture && (
                 <img src={profil} alt="" className="mb-4 col-10 mx-auto profileDash" />
+                )}
+                
+                
                 </div>
                 <h1 className="lead teksprimary text-center fw-bold mb-4 ">{userName}</h1>
                 <p className="lead mb-1">Hi <span className="teksprimary">{userName}</span>! <br /> you are signed-<span className="teksprimary">In</span> as,</p>
@@ -309,7 +350,7 @@ return(
     
               <div key={thread.threadId} className="thread mb-5">
               <div className="headerThread mb-3 d-flex">
-                <img src={profil} alt="" className="mightKnow col-2" />
+                <img src={`data:image/jpeg;base64,${thread.user.profilePicture}`} alt="" className="mightKnow col-2" />
                 <a href={`/profile/${thread.user.userId}`} className="lead fw-bold linkprimary text-dark my-auto mx-3 col-7">{thread.user.userName}</a>
                 <small className=" text-muted text-center my-auto ">{formatDistanceToNow(new Date(thread.threadDate), { addSuffix: true })}</small>
               </div>
@@ -444,7 +485,17 @@ return(
       {threads.map(thread => (
         <div key={thread.threadId} className="thread mb-5">
           <div className="headerThread mb-3 d-flex">
+
+            {thread.user.profilePicture && (
+            <img src={`data:image/jpeg;base64,${thread.user.profilePicture}`} alt="" className="mightKnow col-2" />
+
+            )}
+            {!thread.user.profilePicture && (
             <img src={profil} alt="" className="mightKnow col-2" />
+
+            )}
+            
+            
             <a href={`/profile/${thread.user.userId}`} className="lead fw-bold linkprimary text-dark my-auto mx-3 col-7">{thread.user.userName}</a>
             <small className=" text-muted text-center my-auto ">{formatDistanceToNow(new Date(thread.threadDate), { addSuffix: true })}</small>
 
@@ -564,12 +615,12 @@ return(
 </div>
 )}
 
-{roleId === 1 && (
+{roleId === 1 && userInfo && (
     <div className="admin body col-12 d-flex justify-content-center bg-light">
         <div className="col-3 me-3">
                 <div className="loginBox p-5 bg-white">
                     <div className='d-flex justify-content-center mb-4'>
-                        <img src={profil} alt="" className="col-10 profileDash" />
+                        <img src={`data:image/jpeg;base64,${userInfo.profilePicture}`} alt="" className="col-10 profileDash" />
                     </div>
                 <h1 className="lead teksprimary text-center fw-bold mb-4">{userName}</h1>
                 <p className="lead mb-1">Hi <span className="teksprimary">{userName}</span>! <br /> you are signed-<span className="teksprimary">In</span> as,</p>
